@@ -1,7 +1,7 @@
 :root {
 	--clr-text: #fdefcd;
 	--clr-selection: rgba(255, 156, 245, 0.3);
-	--clr-background: #212720;
+	--clr-background: #00001c;
 }
 
 @font-face {
@@ -117,6 +117,7 @@ canvas {
 		font-size: 2vw;
 	}
 }
+
 .container {
 	display: flex;
 	flex-direction: column;
