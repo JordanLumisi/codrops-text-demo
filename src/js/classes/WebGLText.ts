@@ -18,24 +18,11 @@ export default class WebGLText {
 	private element: HTMLElement;
 
 	private computedStyle: CSSStyleDeclaration;
-	private font!: string; // Path to our .ttf font file.
+	private font!: string; // Path to our font file.
 	private bounds!: DOMRect;
 	private color!: THREE.Color;
 	private material!: THREE.ShaderMaterial;
 	private mesh!: Text;
-
-	// We assign the correct font bard on our element's font weight from here
-	private weightToFontMap: Record<string, string> = {
-		"900": "/fonts/Humane-Black.ttf",
-		"800": "/fonts/Humane-ExtraBold.ttf",
-		"700": "/fonts/Humane-Bold.ttf",
-		"600": "/fonts/Humane-SemiBold.ttf",
-		"500": "/fonts/Humane-Medium.ttf",
-		"400": "/fonts/Humane-Regular.ttf",
-		"300": "/fonts/Humane-Light.ttf",
-		"200": "/fonts/Humane-ExtraLight.ttf",
-		"100": "/fonts/Humane-Thin.ttf",
-	};
 
 	private y: number = 0; // Scroll-adjusted bounds.top
 	private isVisible: boolean = true;
@@ -66,7 +53,7 @@ export default class WebGLText {
 	}
 
 	private createFont() {
-		this.font = this.weightToFontMap[this.computedStyle.fontWeight] || "/fonts/Humane-Regular.ttf";
+		this.font = "/fonts/Graphie-ExtraBold.ttf";
 	}
 
 	private createBounds() {
@@ -108,7 +95,16 @@ export default class WebGLText {
 		this.mesh.text = this.element.innerText; // Always use innerText (not innerHTML or textContent).
 		this.mesh.font = this.font;
 
-		this.mesh.anchorX = "0%"; // We set to position it from the left, instead of the center as in traditional ThreeJS/WebGL
+		console.log("[WebGLText] text:", this.mesh.text);
+		console.log("[WebGLText] font URL:", this.mesh.font);
+
+		// NEW: log geometry info once Troika has had a frame to build it
+		setTimeout(() => {
+			console.log("[WebGLText] geometry:", this.mesh.geometry);
+			console.log("[WebGLText] boundingBox:", this.mesh.geometry.boundingBox);
+		}, 1000);
+
+		this.mesh.anchorX = "50%"; // Center the text geometry horizontally around the mesh position
 		this.mesh.anchorY = "50%";
 
 		this.mesh.material = this.material;
@@ -154,9 +150,19 @@ export default class WebGLText {
 				-this.y +
 				this.commons.lenis.animatedScroll +
 				this.commons.sizes.screen.height / 2 -
-				this.bounds.height / 2;
+				this.bounds.height / 2 -
+				30; // small downward offset to better match HTML text baseline
 
-			this.mesh.position.x = this.bounds.left - this.commons.sizes.screen.width / 2;
+			// Align horizontally with the DOM element by mapping its center into the camera space
+			const domCenterX = this.bounds.left + this.bounds.width / 2;
+			this.mesh.position.x = domCenterX - this.commons.sizes.screen.width / 2;
+
+			console.log(
+				"[WebGLText] pos:",
+				this.mesh.position.x,
+				this.mesh.position.y,
+				this.mesh.position.z
+			);
 
 			const uvX = (this.mouse.x - this.bounds.left) / this.bounds.width;
 			const uvY = (this.mouse.y - this.commons.lenis.animatedScroll - this.y) / this.bounds.height;

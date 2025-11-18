@@ -5,79 +5,17 @@
 }
 
 @font-face {
-	font-family: "Humane";
-	src: url("/fonts/Humane-Black.ttf") format("truetype");
-	font-weight: 900;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "Humane";
-	src: url("/fonts/Humane-Bold.ttf") format("truetype");
-	font-weight: 700;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "Humane";
-	src: url("/fonts/Humane-ExtraBold.ttf") format("truetype");
+	font-family: "Graphie";
+	src: url("/fonts/Graphie-ExtraBold.ttf") format("truetype"),
+		url("/fonts/Graphie-ExtraBold.otf") format("opentype");
 	font-weight: 800;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "Humane";
-	src: url("/fonts/Humane-ExtraLight.ttf") format("truetype");
-	font-weight: 200;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "Humane";
-	src: url("/fonts/Humane-Light.ttf") format("truetype");
-	font-weight: 300;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "Humane";
-	src: url("/fonts/Humane-Medium.ttf") format("truetype");
-	font-weight: 500;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "Humane";
-	src: url("/fonts/Humane-Regular.ttf") format("truetype");
-	font-weight: 400;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "Humane";
-	src: url("/fonts/Humane-SemiBold.ttf") format("truetype");
-	font-weight: 600;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "Humane";
-	src: url("/fonts/Humane-Thin.ttf") format("truetype");
-	font-weight: 100;
 	font-style: normal;
 	font-display: swap;
 }
 
 body {
 	background: var(--clr-background);
+	font-family: Graphie, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 canvas {
@@ -110,7 +48,7 @@ canvas {
 
 .content {
 	width: 100%;
-	font-family: Humane;
+	font-family: Graphie, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 	font-size: 0.825vw;
 
 	@media (max-width: 768px) {
@@ -144,7 +82,9 @@ canvas {
 }
 
 .text__1 {
-	font-size: 24.4em;
+	font-size: 10.4em;
+	line-height: 90%;
+	letter-spacing: -0.01em;
 	font-weight: 700;
 	max-width: 45em;
 
